@@ -1,6 +1,6 @@
 # Via: https://github.com/jstrieb/ctf-collab/blob/main/.github/workflows/run-server-graphical.yml
 
-name: Run Graphical RDP Environment (Ubuntu GNOME)
+name: Run Graphical RDP Environment (Ubuntu KDE)
 
 # Only run when manually triggered
 on:
@@ -77,20 +77,9 @@ jobs:
             --output-document idafree70_linux.run \
             "https://out7.hex-rays.com/files/idafree70_linux.run"
           chmod +x idafree70_linux.run
-          ./idafree70_linux.run --mode unattended --installpassword ctf
+          ./idafree70_linux.run --mode unattended --installpassword poepjes
           echo 'alias ida="~/idafree-7.0/ida64"' >> ~/.bashrc
 
-      - name: Install Ghidra
-        run: |
-          wget \
-            --quiet \
-            --output-document "ghidra.zip" \
-            "https://ghidra-sre.org/ghidra_9.2_PUBLIC_20201113.zip"
-          unzip ghidra.zip
-          mv ghidra_9.2_PUBLIC ~/ghidra
-          echo 'alias ghidra="~/ghidra/ghidraRun"' >> ~/.bashrc
-
-   
       - name: Install RDP server
         run: |
           sudo apt --yes install xrdp

@@ -57,14 +57,17 @@ jobs:
       - name: Install (and upgrade) graphical packages
         run: |
           PACKAGES=(
-            kubuntu-desktop
+            #kubuntu-desktop
             kde-plasma-desktop
           )
           sudo apt-get --yes install ${PACKAGES[@]}
 
-          # Make sure the display manager is running after install
-          sudo systemctl start sddm
+      - name: Make sure the display manager is running after install
+        run: |
+          sudo systemctl enable --now sddm
 
+      - name: install IDA
+        run: |
           # Install IDA
           cd
           mkdir --parents Downloads
@@ -77,7 +80,8 @@ jobs:
           ./idafree70_linux.run --mode unattended --installpassword ctf
           echo 'alias ida="~/idafree-7.0/ida64"' >> ~/.bashrc
 
-          # Install Ghidra
+      - name: Install Ghidra
+        run: |
           wget \
             --quiet \
             --output-document "ghidra.zip" \
@@ -90,7 +94,7 @@ jobs:
       - name: Install RDP server
         run: |
           sudo apt --yes install xrdp
-          sudo systemctl enable xrdp
+          sudo systemctl enable --now xrdp
 
       - name: Install Apache Guacamole
         run: |

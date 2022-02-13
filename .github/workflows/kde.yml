@@ -58,7 +58,7 @@ jobs:
         run: |
           PACKAGES=(
             kubuntu-desktop
-            wireshark
+            kde-plasma-desktop
           )
           sudo apt-get --yes install ${PACKAGES[@]}
 
